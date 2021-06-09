@@ -1,6 +1,7 @@
 from flask import jsonify, request
 from app import app
 
+
 class BasicException(Exception):
     status_code = 0
     default_message = 'Unknown Error'
