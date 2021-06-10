@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  flask-container:
+    depends_on:
+      - postgres-container
+    image: flask-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://user_db:userpass@flask-docker_postgres-container_1:5432/db_api
+    networks:
+      - flask-net
+    ports:
+    - 5001:5000
+    volumes:
+    - ./app:/app
+  postgres-container:
+    image: postgres:11.0-alpine
+    networks:
+      - db-net
+      - flask-net
+    environment:
+      POSTGRES_USER: user_db
+      POSTGRES_PASSWORD: userpass
+      POSTGRES_DB: db_api
+volumes:
+  pg-data:
+networks:
+  db-net:
+  flask-net:

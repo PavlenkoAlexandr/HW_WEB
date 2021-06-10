@@ -43,6 +43,11 @@ app.add_url_rule(
 
 app.add_url_rule(
     '/api/v1/advertisements/<int:id>',
-    view_func=AdvertisementView.as_view('advertisements_dlete'),
+    view_func=AdvertisementView.as_view('advertisements_delete'),
     methods=['DELETE', ],
 )
+
+
+@app.route('/')
+def home():
+    return f'Hello from Flask'
